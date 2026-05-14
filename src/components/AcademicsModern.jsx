@@ -230,7 +230,7 @@ const AcademicsModern = () => {
                   >
                     <program.icon size={30} color="white" />
                   </div>
-                  <h3 style={{ fontSize: '1.75rem', fontWeight: 700, marginBottom: '0.25rem' }}>
+                  <h3 className="program-card-title" style={{ fontSize: '1.75rem', fontWeight: 700, marginBottom: '0.25rem' }}>
                     {program.title}
                   </h3>
                   <p style={{ opacity: 0.9 }}>{program.subtitle}</p>

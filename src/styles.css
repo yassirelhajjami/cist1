@@ -84,10 +84,10 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: var(--spacing-sm);
 }
 
-h1 { font-size: 3rem; }
-h2 { font-size: 2.5rem; }
-h3 { font-size: 2rem; }
-h4 { font-size: 1.5rem; }
+h1 { font-size: clamp(1.75rem, 5vw, 3rem); }
+h2 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+h3 { font-size: clamp(1.25rem, 3vw, 2rem); }
+h4 { font-size: clamp(1.1rem, 2.5vw, 1.5rem); }
 h5 { font-size: 1.25rem; }
 h6 { font-size: 1rem; }
 
@@ -1306,11 +1306,11 @@ a:hover {
 }
 
 .bg-gradient-to-r {
-  background: linear-gradient(to right, var(--gradient-from), var(--gradient-to));
+  background: linear-gradient(to right, #D32F2F, #B71C1C);
 }
 
 .bg-gradient-to-br {
-  background: linear-gradient(to bottom right, var(--gradient-from), var(--gradient-to));
+  background: linear-gradient(to bottom right, #D32F2F, #B71C1C);
 }
 
 .aspect-square {
@@ -1450,5 +1450,60 @@ a:hover {
   .programs-grid {
     grid-template-columns: repeat(4, 1fr) !important;
     gap: 1.25rem !important;
+  }
+}
+
+/* Mobile-specific layout fixes */
+@media (max-width: 640px) {
+  /* Contact form two-column rows → single column */
+  .form-row-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* News grid: news col spans full width */
+  .news-main-col {
+    grid-column: span 1 !important;
+  }
+
+  /* Footer brand col: don't span 2 on mobile */
+  .footer-brand-col {
+    grid-column: span 1 !important;
+  }
+
+  /* Footer newsletter input full width */
+  .footer-newsletter-form {
+    width: 100%;
+  }
+  .footer-newsletter-input {
+    width: 100% !important;
+  }
+
+  /* About section features 2-col → 1-col */
+  .about-features-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Reduce section padding on mobile */
+  section {
+    padding-top: 3.5rem !important;
+    padding-bottom: 3.5rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Navbar: tighter container padding */
+  .container {
+    padding: 0 0.875rem;
+  }
+
+  /* Hero stats: 2×2 on very small screens */
+  .hero-stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+  }
+
+  /* Academics card title smaller */
+  .program-card-title {
+    font-size: 1.25rem !important;
   }
 }

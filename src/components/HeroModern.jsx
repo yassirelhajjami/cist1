@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronDown, ArrowRight, CalendarCheck } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const HeroModern = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -79,7 +81,7 @@ const HeroModern = () => {
         zIndex: 10,
         textAlign: 'center',
         color: 'white',
-        padding: '0 1rem',
+        padding: 'clamp(5rem, 12vh, 7rem) 1rem clamp(5rem, 12vh, 7rem)',
         maxWidth: '900px',
         width: '100%',
         boxSizing: 'border-box',
@@ -98,8 +100,8 @@ const HeroModern = () => {
           wordWrap: 'break-word',
           overflowWrap: 'break-word',
         }}>
-          Excellence in
-          <span style={{ color: '#FF6B6B', display: 'block' }}>Education</span>
+          {t('hero.line1')}
+          <span style={{ color: '#FF6B6B', display: 'block' }}>{t('hero.line2')}</span>
         </h1>
 
         {/* Subtitle */}
@@ -116,8 +118,7 @@ const HeroModern = () => {
           wordWrap: 'break-word',
           overflowWrap: 'break-word',
         }}>
-          Canadian International School Tangier - Nurturing global citizens 
-          with Canadian curriculum and international standards
+          {t('hero.subtitle')}
         </p>
 
         {/* CTA Buttons */}
@@ -154,7 +155,7 @@ const HeroModern = () => {
               e.currentTarget.style.boxShadow = '0 4px 15px rgba(211,47,47,0.4)';
             }}
           >
-            Register Now
+            {t('hero.register')}
             <ArrowRight size={20} />
           </button>
 
@@ -184,23 +185,23 @@ const HeroModern = () => {
             }}
           >
             <CalendarCheck size={18} />
-            Book a Tour
+            {t('hero.tour')}
           </button>
         </div>
 
         {/* Stats */}
-        <div style={{
+        <div className="hero-stats-grid" style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
-          gap: '2rem',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))',
+          gap: '1.5rem',
           maxWidth: '600px',
           margin: '0 auto',
         }}>
           {[
-            { value: '15+', label: 'Years' },
-            { value: '500+', label: 'Students' },
-            { value: '40+', label: 'Teachers' },
-            { value: '3', label: 'Languages' },
+            { value: '15+', label: t('hero.years') },
+            { value: '500+', label: t('hero.students') },
+            { value: '40+', label: t('hero.teachers') },
+            { value: '3', label: t('hero.languages') },
           ].map((stat, index) => (
             <div key={index} style={{ textAlign: 'center' }}>
               <div style={{
@@ -220,7 +221,7 @@ const HeroModern = () => {
       {/* Slide Indicators */}
       <div style={{
         position: 'absolute',
-        bottom: '100px',
+        bottom: 'clamp(52px, 8vh, 80px)',
         left: '50%',
         transform: 'translateX(-50%)',
         display: 'flex',

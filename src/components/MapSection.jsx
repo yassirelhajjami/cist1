@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { MapPin, Navigation, ExternalLink } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const MapSection = () => {
+  const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -52,7 +54,7 @@ const MapSection = () => {
             textTransform: 'uppercase',
             letterSpacing: '2px',
           }}>
-            Find Us
+            {t('map.label')}
           </span>
           <h2 style={{
             fontSize: 'clamp(2rem, 4vw, 3rem)',
@@ -61,7 +63,7 @@ const MapSection = () => {
             margin: '1rem 0',
             fontFamily: 'Playfair Display, serif',
           }}>
-            Visit Our Campus
+            {t('map.title')}
           </h2>
           <p style={{
             fontSize: '1.125rem',
@@ -70,7 +72,7 @@ const MapSection = () => {
             margin: '0 auto',
             lineHeight: 1.7,
           }}>
-            Located in the beautiful city of Tangier, our campus is easily accessible and welcomes visitors for tours.
+            {t('map.subtitle')}
           </p>
         </div>
 
@@ -155,7 +157,7 @@ const MapSection = () => {
                 }}
               >
                 <Navigation size={20} />
-                Get Directions
+                {t('map.directions')}
               </a>
 
               <a
@@ -186,7 +188,7 @@ const MapSection = () => {
                 }}
               >
                 <ExternalLink size={20} />
-                Open in Google Maps
+                {t('map.openMaps')}
               </a>
             </div>
           </div>

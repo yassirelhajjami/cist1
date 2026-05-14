@@ -1,22 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, GraduationCap } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const NavbarModern = ({ scrolled }) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useTranslation();
   const isHomePage = location.pathname === '/';
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [logoError, setLogoError] = useState(false);
 
   const navItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Academics', href: '#academics' },
-    { name: 'Campus', href: '#campus-life' },
-    { name: 'News', href: '#news' },
-    { name: 'Contact', href: '#contact' },
+    { name: t('nav.home'), href: '#home' },
+    { name: t('nav.about'), href: '#about' },
+    { name: t('nav.academics'), href: '#academics' },
+    { name: t('nav.campus'), href: '#campus-life' },
+    { name: t('nav.news'), href: '#news' },
+    { name: t('nav.contact'), href: '#contact' },
   ];
 
   useEffect(() => {
@@ -77,8 +80,8 @@ const NavbarModern = ({ scrolled }) => {
                 src="/images/logo.webp"
                 alt="CIST"
                 style={{
-                  height: '100px',
-                  width: '180px',
+                  height: 'clamp(56px, 10vw, 90px)',
+                  width: 'clamp(100px, 18vw, 160px)',
                   objectFit: 'contain',
                   display: 'block',
                   borderRadius: '8px',
@@ -88,8 +91,8 @@ const NavbarModern = ({ scrolled }) => {
             ) : (
               <div
                 style={{
-                  width: '180px',
-                  height: '100px',
+                  width: 'clamp(100px, 18vw, 160px)',
+                  height: 'clamp(56px, 10vw, 90px)',
                   background: 'linear-gradient(135deg, #D32F2F 0%, #B71C1C 100%)',
                   display: 'flex',
                   alignItems: 'center',
@@ -103,9 +106,9 @@ const NavbarModern = ({ scrolled }) => {
           </div>
 
           {/* Desktop Navigation */}
-          <div style={{ 
+          <div style={{
             display: 'none',
-            alignItems: 'center', 
+            alignItems: 'center',
             gap: '0.25rem',
           }} className="desktop-nav">
             {navItems.map((item) => (
@@ -135,7 +138,8 @@ const NavbarModern = ({ scrolled }) => {
                 {item.name}
               </button>
             ))}
-            <button 
+            <LanguageSwitcher scrolled={scrolled} />
+            <button
               onClick={() => navigate('/enroll')}
               style={{
                 background: 'linear-gradient(135deg, #D32F2F 0%, #B71C1C 100%)',
@@ -158,28 +162,30 @@ const NavbarModern = ({ scrolled }) => {
                 e.target.style.boxShadow = '0 4px 15px rgba(211,47,47,0.3)';
               }}
             >
-              Register Now
+              {t('nav.register')}
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            style={{
-              background: scrolled ? '#f5f5f5' : 'rgba(255,255,255,0.1)',
-              border: 'none',
-              cursor: 'pointer',
-              color: scrolled ? '#333' : '#fff',
-              padding: '0.5rem',
-              borderRadius: '8px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-            className="mobile-menu-btn"
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile: Language + Menu */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }} className="mobile-menu-btn">
+            <LanguageSwitcher scrolled={scrolled} />
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              style={{
+                background: scrolled ? '#f5f5f5' : 'rgba(255,255,255,0.1)',
+                border: 'none',
+                cursor: 'pointer',
+                color: scrolled ? '#333' : '#fff',
+                padding: '0.5rem',
+                borderRadius: '8px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
@@ -213,7 +219,7 @@ const NavbarModern = ({ scrolled }) => {
                 {item.name}
               </button>
             ))}
-            <button 
+            <button
               onClick={() => {
                 navigate('/enroll');
                 setIsMenuOpen(false);
@@ -229,7 +235,7 @@ const NavbarModern = ({ scrolled }) => {
                 marginTop: '0.5rem',
               }}
             >
-              Register Now
+              {t('nav.register')}
             </button>
           </div>
         )}

@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
 import { ArrowLeft, CheckCircle, User, Phone, Mail, Users, MessageCircle, FileText } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import NavbarModern from '../components/NavbarModern';
 import FooterModern from '../components/FooterModern';
 
 const EnrollmentPage = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -57,7 +59,7 @@ const EnrollmentPage = () => {
         setSubmitted(true);
       })
       .catch(() => {
-        setSubmitError('There was an error submitting the form. Please try again.');
+        setSubmitError(t('enrollment.errorMsg'));
       });
   };
 
@@ -92,11 +94,10 @@ const EnrollmentPage = () => {
             <CheckCircle size={40} color="white" />
           </div>
           <h2 style={{ fontSize: '1.75rem', fontWeight: 700, marginBottom: '1rem', color: '#1a1a1a' }}>
-            Pre-Registration Submitted!
+            {t('enrollment.successTitle')}
           </h2>
           <p style={{ color: '#666', marginBottom: '2rem', lineHeight: 1.6 }}>
-            Thank you for your interest in Canadian International School Tangier. 
-            We have received your pre-registration and will contact you within 24-48 hours.
+            {t('enrollment.successMsg')}
           </p>
           <button
             onClick={() => navigate('/')}
@@ -115,7 +116,7 @@ const EnrollmentPage = () => {
             }}
           >
             <ArrowLeft size={20} />
-            Return to Home
+            {t('enrollment.returnHome')}
           </button>
         </div>
       </div>
@@ -153,10 +154,10 @@ const EnrollmentPage = () => {
             </button>
             <div>
               <h1 style={{ fontSize: '1.75rem', fontWeight: 700, margin: 0 }}>
-                Pre-Registration
+                {t('enrollment.title')}
               </h1>
               <p style={{ margin: '0.25rem 0 0 0', opacity: 0.9 }}>
-                Canadian International School Tangier
+                {t('enrollment.school')}
               </p>
             </div>
           </div>
@@ -175,13 +176,13 @@ const EnrollmentPage = () => {
           }}>
             <h2 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '1.5rem', color: '#1a1a1a', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <User size={24} color="#D32F2F" />
-              Student Information
+              {t('enrollment.studentInfo')}
             </h2>
 
             <div style={{ display: 'grid', gap: '1rem', marginBottom: '2rem' }}>
               <div>
                 <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', color: '#333' }}>
-                  Full Name *
+                  {t('enrollment.fullName')}
                 </label>
                 <input
                   type="text"
@@ -189,7 +190,7 @@ const EnrollmentPage = () => {
                   value={formData.studentName}
                   onChange={handleInputChange}
                   required
-                  placeholder="Enter student's full name"
+                  placeholder={t('enrollment.namePlaceholder')}
                   style={{
                     width: '100%',
                     padding: '0.75rem 1rem',
@@ -203,7 +204,7 @@ const EnrollmentPage = () => {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                 <div>
                   <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', color: '#333' }}>
-                    Date of Birth *
+                    {t('enrollment.dob')}
                   </label>
                   <input
                     type="date"
@@ -222,7 +223,7 @@ const EnrollmentPage = () => {
                 </div>
                 <div>
                   <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', color: '#333' }}>
-                    Gender *
+                    {t('enrollment.gender')}
                   </label>
                   <select
                     name="gender"
@@ -237,16 +238,16 @@ const EnrollmentPage = () => {
                       fontSize: '1rem'
                     }}
                   >
-                    <option value="">Select</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
+                    <option value="">{t('enrollment.selectGender')}</option>
+                    <option value="male">{t('enrollment.male')}</option>
+                    <option value="female">{t('enrollment.female')}</option>
                   </select>
                 </div>
               </div>
 
               <div>
                 <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', color: '#333' }}>
-                  Grade Applying For *
+                  {t('enrollment.grade')}
                 </label>
                 <select
                   name="gradeApplying"
@@ -261,7 +262,7 @@ const EnrollmentPage = () => {
                     fontSize: '1rem'
                   }}
                 >
-                  <option value="">Select Grade</option>
+                  <option value="">{t('enrollment.selectGrade')}</option>
                   <option value="kindergarten">Kindergarten</option>
                   <option value="grade1">Grade 1</option>
                   <option value="grade2">Grade 2</option>
@@ -281,13 +282,13 @@ const EnrollmentPage = () => {
 
             <h2 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '1.5rem', color: '#1a1a1a', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <Users size={24} color="#D32F2F" />
-              Parent / Guardian Information
+              {t('enrollment.parentInfo')}
             </h2>
 
             <div style={{ display: 'grid', gap: '1rem', marginBottom: '2rem' }}>
               <div>
                 <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', color: '#333' }}>
-                  Parent/Guardian Name *
+                  {t('enrollment.parentName')}
                 </label>
                 <input
                   type="text"
@@ -295,7 +296,7 @@ const EnrollmentPage = () => {
                   value={formData.parentName}
                   onChange={handleInputChange}
                   required
-                  placeholder="Enter parent's full name"
+                  placeholder={t('enrollment.parentPlaceholder')}
                   style={{
                     width: '100%',
                     padding: '0.75rem 1rem',
@@ -310,7 +311,7 @@ const EnrollmentPage = () => {
                 <div>
                   <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', color: '#333' }}>
                     <Phone size={14} style={{ display: 'inline', marginRight: '0.25rem' }} />
-                    Phone *
+                    {t('enrollment.phone')}
                   </label>
                   <input
                     type="tel"
@@ -318,7 +319,7 @@ const EnrollmentPage = () => {
                     value={formData.phone}
                     onChange={handleInputChange}
                     required
-                    placeholder="Phone number"
+                    placeholder={t('enrollment.phonePlaceholder')}
                     style={{
                       width: '100%',
                       padding: '0.75rem 1rem',
@@ -330,14 +331,14 @@ const EnrollmentPage = () => {
                 </div>
                 <div>
                   <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', color: '#333' }}>
-                    WhatsApp
+                    {t('enrollment.whatsapp')}
                   </label>
                   <input
                     type="tel"
                     name="whatsapp"
                     value={formData.whatsapp}
                     onChange={handleInputChange}
-                    placeholder="WhatsApp number (optional)"
+                    placeholder={t('enrollment.whatsappPlaceholder')}
                     style={{
                       width: '100%',
                       padding: '0.75rem 1rem',
@@ -352,7 +353,7 @@ const EnrollmentPage = () => {
               <div>
                 <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', color: '#333' }}>
                   <Mail size={14} style={{ display: 'inline', marginRight: '0.25rem' }} />
-                  Email Address *
+                  {t('enrollment.emailLabel')}
                 </label>
                 <input
                   type="email"
@@ -360,7 +361,7 @@ const EnrollmentPage = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                   required
-                  placeholder="Enter email address"
+                  placeholder={t('enrollment.emailPlaceholder')}
                   style={{
                     width: '100%',
                     padding: '0.75rem 1rem',
@@ -384,7 +385,7 @@ const EnrollmentPage = () => {
                   style={{ marginTop: '0.25rem', width: '18px', height: '18px', cursor: 'pointer', accentColor: '#D32F2F' }}
                 />
                 <span style={{ fontSize: '0.95rem', color: '#333', lineHeight: 1.5 }}>
-                  I have read and agree to the{' '}
+                  {t('enrollment.agreementText')}{' '}
                   <a
                     href="/pdfs/parent-school-agreement.pdf"
                     target="_blank"
@@ -400,9 +401,9 @@ const EnrollmentPage = () => {
                     }}
                   >
                     <FileText size={14} />
-                    PARENT-SCHOOL AGREEMENT
+                    {t('enrollment.agreementLink')}
                   </a>
-                  {' '}and its terms.
+                  {' '}{t('enrollment.agreementEnd')}
                 </span>
               </label>
             </div>
@@ -442,7 +443,7 @@ const EnrollmentPage = () => {
                 e.target.style.boxShadow = 'none';
               }}
             >
-              Submit Pre-Registration
+              {t('enrollment.submit')}
             </button>
           </div>
         </form>

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Camera, X, Trophy, Music, BookOpen, Heart, MapPin } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const CampusLifeModern = () => {
+  const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedImage, setSelectedImage] = useState(null);
@@ -26,11 +28,11 @@ const CampusLifeModern = () => {
   }, []);
 
   const categories = [
-    { id: 'all', name: 'All', icon: Camera },
-    { id: 'sports', name: 'Sports', icon: Trophy },
-    { id: 'arts', name: 'Arts', icon: Music },
-    { id: 'academics', name: 'Academics', icon: BookOpen },
-    { id: 'community', name: 'Community', icon: Heart },
+    { id: 'all', name: t('campus.all'), icon: Camera },
+    { id: 'sports', name: t('campus.sports'), icon: Trophy },
+    { id: 'arts', name: t('campus.arts'), icon: Music },
+    { id: 'academics', name: t('campus.academics'), icon: BookOpen },
+    { id: 'community', name: t('campus.community'), icon: Heart },
   ];
 
   const galleryItems = [
@@ -77,27 +79,27 @@ const CampusLifeModern = () => {
 
   const activities = [
     {
-      title: 'Sports & Athletics',
+      title: t('campus.sportsTitle'),
       icon: Trophy,
-      items: ['Basketball', 'Soccer', 'Swimming', 'Track & Field'],
+      items: t('campus.sportsItems', { returnObjects: true }),
       color: '#FF6B6B',
     },
     {
-      title: 'Arts & Culture',
+      title: t('campus.artsTitle'),
       icon: Music,
-      items: ['Visual Arts', 'Music', 'Drama', 'Dance'],
+      items: t('campus.artsItems', { returnObjects: true }),
       color: '#4ECDC4',
     },
     {
-      title: 'Academic Clubs',
+      title: t('campus.clubsTitle'),
       icon: BookOpen,
-      items: ['Robotics', 'Debate', 'Chess', 'Science Club'],
+      items: t('campus.clubsItems', { returnObjects: true }),
       color: '#667eea',
     },
     {
-      title: 'Community Service',
+      title: t('campus.serviceTitle'),
       icon: Heart,
-      items: ['Volunteering', 'Environmental', 'Charity', 'Mentoring'],
+      items: t('campus.serviceItems', { returnObjects: true }),
       color: '#F7B731',
     },
   ];
@@ -154,7 +156,7 @@ const CampusLifeModern = () => {
               letterSpacing: '2px',
             }}
           >
-            Campus Life
+            {t('campus.label')}
           </span>
           <h2
             style={{
@@ -165,7 +167,7 @@ const CampusLifeModern = () => {
               fontFamily: 'Playfair Display, serif',
             }}
           >
-            Beyond the Classroom
+            {t('campus.title')}
           </h2>
           <p
             style={{
@@ -176,7 +178,7 @@ const CampusLifeModern = () => {
               lineHeight: 1.7,
             }}
           >
-            Discover the vibrant community and diverse activities that make CIST a truly enriching experience.
+            {t('campus.subtitle')}
           </p>
         </div>
 
@@ -311,7 +313,7 @@ const CampusLifeModern = () => {
                   e.currentTarget.style.boxShadow = '0 4px 15px rgba(211, 47, 47, 0.3)';
                 }}
               >
-                {showMore ? 'View Less' : 'View More'}
+                {showMore ? t('campus.viewLess') : t('campus.viewMore')}
               </button>
             </div>
           )}

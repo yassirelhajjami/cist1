@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { GraduationCap, Facebook, Twitter, Instagram, Linkedin, Youtube, Mail, ArrowRight, ChevronUp } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const FooterModern = () => {
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [logoError, setLogoError] = useState(false);
@@ -20,15 +22,15 @@ const FooterModern = () => {
   };
 
   const footerLinks = {
-    'Quick Links': [
-      { name: 'About Us', href: '#about' },
-      { name: 'Academics', href: '#academics' },
-      { name: 'Admissions', href: '/enroll' },
-      { name: 'Campus Life', href: '#campus-life' },
-      { name: 'News & Events', href: '#news' },
-      { name: 'Contact', href: '#contact' },
+    [t('footer.quickLinks')]: [
+      { name: t('footer.about'), href: '#about' },
+      { name: t('footer.academics'), href: '#academics' },
+      { name: t('footer.admissions'), href: '/enroll' },
+      { name: t('footer.campus'), href: '#campus-life' },
+      { name: t('footer.news'), href: '#news' },
+      { name: t('footer.contact'), href: '#contact' },
     ],
-    'Contact': [
+    [t('footer.contact')]: [
       { name: 'Route du Charf, Km 5', href: '#map-section' },
       { name: 'Tangier 90000, Morocco', href: '#map-section' },
       { name: '+212 665-696565', href: 'tel:+212665696565' },
@@ -54,7 +56,7 @@ const FooterModern = () => {
             alignItems: 'start',
           }}>
             {/* Brand Column */}
-            <div style={{ gridColumn: 'span 2' }}>
+            <div className="footer-brand-col" style={{ gridColumn: 'span 2' }}>
               {/* Logo Section */}
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '1rem', marginBottom: '1rem' }}>
                 {/* Logo Image */}
@@ -63,8 +65,8 @@ const FooterModern = () => {
                     src="/images/logo.webp"
                     alt="CIST logo"
                     style={{
-                      height: '100px',
-                      width: '180px',
+                      height: 'clamp(56px, 10vw, 90px)',
+                      width: 'clamp(100px, 18vw, 160px)',
                       objectFit: 'contain',
                       borderRadius: '8px',
                       display: 'block',
@@ -74,8 +76,8 @@ const FooterModern = () => {
                 ) : (
                   <div
                     style={{
-                      width: '180px',
-                      height: '100px',
+                      width: 'clamp(100px, 18vw, 160px)',
+                      height: 'clamp(56px, 10vw, 90px)',
                       backgroundColor: '#D32F2F',
                       borderRadius: '8px',
                       display: 'flex',
@@ -99,7 +101,7 @@ const FooterModern = () => {
                 marginBottom: '1.5rem',
                 maxWidth: '300px',
               }}>
-                Nurturing global citizens with Canadian curriculum and international standards since 2010.
+                {t('footer.tagline')}
               </p>
 
               {/* Social Links */}
@@ -186,15 +188,15 @@ const FooterModern = () => {
           }}>
             <div>
               <h4 style={{ fontSize: '1.25rem', fontWeight: 600, marginBottom: '0.25rem' }}>
-                Subscribe to Our Newsletter
+                {t('footer.newsletter')}
               </h4>
               <p style={{ color: '#888', fontSize: '0.9rem', margin: 0 }}>
-                Stay updated with the latest news and events from CIST.
+                {t('footer.newsletterDesc')}
               </p>
             </div>
 
-            <form onSubmit={handleSubscribe} style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-              <div style={{ position: 'relative' }}>
+            <form onSubmit={handleSubscribe} className="footer-newsletter-form" style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+              <div style={{ position: 'relative', flex: '1 1 200px' }}>
                 <Mail size={18} style={{
                   position: 'absolute',
                   left: '1rem',
@@ -204,17 +206,18 @@ const FooterModern = () => {
                 }} />
                 <input
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder={t('footer.emailPlaceholder')}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
+                  className="footer-newsletter-input"
                   style={{
                     padding: '0.875rem 1rem 0.875rem 2.75rem',
                     borderRadius: '12px',
                     border: 'none',
                     backgroundColor: '#1a1a1a',
                     color: 'white',
-                    width: '250px',
+                    width: '100%',
                     fontSize: '0.95rem',
                   }}
                 />
@@ -235,7 +238,7 @@ const FooterModern = () => {
                   transition: 'all 0.3s ease',
                 }}
               >
-                {isSubscribed ? 'Subscribed!' : 'Subscribe'}
+                {isSubscribed ? t('footer.subscribed') : t('footer.subscribe')}
                 <ArrowRight size={18} />
               </button>
             </form>
@@ -258,12 +261,12 @@ const FooterModern = () => {
             gap: '1rem',
           }}>
             <p style={{ color: '#666', fontSize: '0.85rem', margin: 0 }}>
-              © {new Date().getFullYear()} Canadian International School Tangier. All rights reserved.
+              © {new Date().getFullYear()} {t('footer.rights')}
             </p>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-              <a href="#" title="Coming soon" aria-label="Privacy Policy (coming soon)" style={{ color: '#666', fontSize: '0.85rem', textDecoration: 'none' }}>Privacy Policy</a>
-              <a href="#" title="Coming soon" aria-label="Terms of Service (coming soon)" style={{ color: '#666', fontSize: '0.85rem', textDecoration: 'none' }}>Terms of Service</a>
+              <a href="#" title="Coming soon" aria-label="Privacy Policy (coming soon)" style={{ color: '#666', fontSize: '0.85rem', textDecoration: 'none' }}>{t('footer.privacy')}</a>
+              <a href="#" title="Coming soon" aria-label="Terms of Service (coming soon)" style={{ color: '#666', fontSize: '0.85rem', textDecoration: 'none' }}>{t('footer.terms')}</a>
               
               {/* Back to Top */}
               <button

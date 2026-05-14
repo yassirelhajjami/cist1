@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
 import { MapPin, Phone, Mail, Clock, Send, CheckCircle, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const ContactModern = () => {
+  const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', subject: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -30,17 +32,17 @@ const ContactModern = () => {
 
   const validate = () => {
     const errors = {};
-    if (!formData.name.trim()) errors.name = 'Name is required.';
+    if (!formData.name.trim()) errors.name = t('contact.nameError');
     if (!formData.email.trim()) {
-      errors.email = 'Email is required.';
+      errors.email = t('contact.emailError');
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      errors.email = 'Enter a valid email address.';
+      errors.email = t('contact.emailInvalid');
     }
     if (formData.phone && !/^[+\d\s\-().]{7,20}$/.test(formData.phone)) {
-      errors.phone = 'Enter a valid phone number.';
+      errors.phone = t('contact.phoneInvalid');
     }
-    if (!formData.subject) errors.subject = 'Please select a subject.';
-    if (!formData.message.trim()) errors.message = 'Message is required.';
+    if (!formData.subject) errors.subject = t('contact.subjectError');
+    if (!formData.message.trim()) errors.message = t('contact.messageError');
     return errors;
   };
 
@@ -77,7 +79,7 @@ const ContactModern = () => {
       })
       .catch(() => {
         setIsSubmitting(false);
-        setSubmitError('There was an error sending your message. Please try again.');
+        setSubmitError(t('contact.errorMsg'));
       });
   };
 
@@ -88,26 +90,26 @@ const ContactModern = () => {
   const contactInfo = [
     {
       icon: MapPin,
-      title: 'Address',
+      title: t('contact.addressLabel'),
       content: ['Route du Charf, Km 5', 'Tangier 90000, Morocco'],
       color: '#D32F2F',
     },
     {
       icon: Phone,
-      title: 'Phone',
+      title: t('contact.phoneLabel'),
       content: ['+212 665-696565'],
       color: '#4ECDC4',
     },
     {
       icon: Mail,
-      title: 'Email',
+      title: t('contact.emailLabel'),
       content: ['contact@cist.ma'],
       color: '#667eea',
     },
     {
       icon: Clock,
-      title: 'Office Hours',
-      content: ['Mon - Fri: 8:00 AM - 5:00 PM', 'Sat: 9:00 AM - 1:00 PM'],
+      title: t('contact.hoursLabel'),
+      content: [t('contact.hours1'), t('contact.hours2')],
       color: '#F7B731',
     },
   ];
@@ -136,7 +138,7 @@ const ContactModern = () => {
             textTransform: 'uppercase',
             letterSpacing: '2px',
           }}>
-            Get In Touch
+            {t('contact.label')}
           </span>
           <h2 style={{
             fontSize: 'clamp(2rem, 4vw, 3rem)',
@@ -145,7 +147,7 @@ const ContactModern = () => {
             margin: '1rem 0',
             fontFamily: 'Playfair Display, serif',
           }}>
-            Contact Us
+            {t('contact.title')}
           </h2>
           <p style={{
             fontSize: '1.125rem',
@@ -154,7 +156,7 @@ const ContactModern = () => {
             margin: '0 auto',
             lineHeight: 1.7,
           }}>
-            Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+            {t('contact.subtitle')}
           </p>
         </div>
 
@@ -217,7 +219,7 @@ const ContactModern = () => {
         {/* Contact Form Section */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 350px), 1fr))',
           gap: '3rem',
           alignItems: 'start',
         }}>
@@ -237,10 +239,10 @@ const ContactModern = () => {
               marginBottom: '0.5rem',
               color: '#1a1a1a',
             }}>
-              Send us a Message
+              {t('contact.formTitle')}
             </h3>
             <p style={{ color: '#888', marginBottom: '2rem' }}>
-              Fill out the form below and we'll get back to you shortly.
+              {t('contact.formSubtitle')}
             </p>
 
             {isSubmitted ? (
@@ -253,15 +255,15 @@ const ContactModern = () => {
                 textAlign: 'center',
               }}>
                 <CheckCircle size={60} color="#4CAF50" style={{ marginBottom: '1rem' }} />
-                <h4 style={{ fontWeight: 700, marginBottom: '0.5rem' }}>Message Sent!</h4>
-                <p style={{ color: '#666' }}>Thank you for contacting us. We'll respond soon.</p>
+                <h4 style={{ fontWeight: 700, marginBottom: '0.5rem' }}>{t('contact.successTitle')}</h4>
+                <p style={{ color: '#666' }}>{t('contact.successMsg')}</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit}>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem', marginBottom: '1rem' }}>
+                <div className="form-row-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem', marginBottom: '1rem' }}>
                   <div>
                     <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, fontSize: '0.9rem', color: '#333' }}>
-                      Full Name *
+                      {t('contact.nameLabel')}
                     </label>
                     <input
                       type="text"
@@ -285,7 +287,7 @@ const ContactModern = () => {
                   </div>
                   <div>
                     <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, fontSize: '0.9rem', color: '#333' }}>
-                      Email *
+                      {t('contact.emailFieldLabel')}
                     </label>
                     <input
                       type="email"
@@ -309,10 +311,10 @@ const ContactModern = () => {
                   </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem', marginBottom: '1rem' }}>
+                <div className="form-row-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem', marginBottom: '1rem' }}>
                   <div>
                     <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, fontSize: '0.9rem', color: '#333' }}>
-                      Phone
+                      {t('contact.phoneFieldLabel')}
                     </label>
                     <input
                       type="tel"
@@ -335,7 +337,7 @@ const ContactModern = () => {
                   </div>
                   <div>
                     <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, fontSize: '0.9rem', color: '#333' }}>
-                      Subject *
+                      {t('contact.subjectLabel')}
                     </label>
                     <select
                       name="subject"
@@ -352,18 +354,18 @@ const ContactModern = () => {
                         cursor: 'pointer',
                       }}
                     >
-                      <option value="">Select a subject</option>
-                      <option value="admissions">Admissions</option>
-                      <option value="general">General Inquiry</option>
-                      <option value="visit">Schedule a Visit</option>
-                      <option value="other">Other</option>
+                      <option value="">{t('contact.subjectDefault')}</option>
+                      <option value="admissions">{t('contact.admissions')}</option>
+                      <option value="general">{t('contact.general')}</option>
+                      <option value="visit">{t('contact.visit')}</option>
+                      <option value="other">{t('contact.other')}</option>
                     </select>
                   </div>
                 </div>
 
                 <div style={{ marginBottom: '1.5rem' }}>
                   <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, fontSize: '0.9rem', color: '#333' }}>
-                    Message *
+                    {t('contact.messageLabel')}
                   </label>
                   <textarea
                     name="message"
@@ -411,7 +413,7 @@ const ContactModern = () => {
                     transition: 'all 0.3s ease',
                   }}
                 >
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                  {isSubmitting ? t('contact.sending') : t('contact.send')}
                   <Send size={20} />
                 </button>
               </form>
@@ -433,17 +435,17 @@ const ContactModern = () => {
               fontWeight: 700,
               marginBottom: '1rem',
             }}>
-              Why Choose CIST?
+              {t('contact.whyTitle')}
             </h3>
 
             <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 2rem 0' }}>
               {[
-                'Canadian curriculum excellence',
-                'Multilingual education (EN/FR/AR)',
-                'Small class sizes (10:1 ratio)',
-                'State-of-the-art facilities',
-                'International exchange programs',
-                '100% university acceptance rate',
+                t('contact.why1'),
+                t('contact.why2'),
+                t('contact.why3'),
+                t('contact.why4'),
+                t('contact.why5'),
+                t('contact.why6'),
               ].map((item, index) => (
                 <li key={index} style={{
                   display: 'flex',
@@ -458,7 +460,7 @@ const ContactModern = () => {
             </ul>
 
             <h4 style={{ fontSize: '1.1rem', fontWeight: 600, marginBottom: '1rem' }}>
-              Follow Us
+              {t('contact.followUs')}
             </h4>
 
             <div style={{ display: 'flex', gap: '1rem' }}>

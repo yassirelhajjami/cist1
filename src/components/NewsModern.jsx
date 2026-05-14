@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, Clock, User, ArrowRight, ChevronRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const NewsModern = () => {
+  const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
   const [activeFilter, setActiveFilter] = useState('all');
   const [expandedArticle, setExpandedArticle] = useState(null);
@@ -27,10 +29,10 @@ const NewsModern = () => {
   }, []);
 
   const filters = [
-    { id: 'all', label: 'All News' },
-    { id: 'achievements', label: 'Achievements' },
-    { id: 'events', label: 'Events' },
-    { id: 'announcements', label: 'Announcements' },
+    { id: 'all', label: t('news.all') },
+    { id: 'achievements', label: t('news.achievements') },
+    { id: 'events', label: t('news.events') },
+    { id: 'announcements', label: t('news.announcements') },
   ];
 
   const newsItems = [
@@ -101,7 +103,7 @@ const NewsModern = () => {
             textTransform: 'uppercase',
             letterSpacing: '2px',
           }}>
-            News & Updates
+            {t('news.label')}
           </span>
           <h2 style={{
             fontSize: 'clamp(2rem, 4vw, 3rem)',
@@ -110,7 +112,7 @@ const NewsModern = () => {
             margin: '1rem 0',
             fontFamily: 'Playfair Display, serif',
           }}>
-            News & Events
+            {t('news.title')}
           </h2>
           <p style={{
             fontSize: '1.125rem',
@@ -119,7 +121,7 @@ const NewsModern = () => {
             margin: '0 auto',
             lineHeight: 1.7,
           }}>
-            Stay updated with the latest happenings, achievements, and upcoming events.
+            {t('news.subtitle')}
           </p>
         </div>
 
@@ -130,7 +132,7 @@ const NewsModern = () => {
           alignItems: 'start',
         }}>
           {/* News Column */}
-          <div style={{ gridColumn: 'span 2' }}>
+          <div className="news-main-col" style={{ gridColumn: 'span 2' }}>
             {/* Filters */}
             <div style={{
               display: 'flex',
@@ -176,11 +178,11 @@ const NewsModern = () => {
                 >
                   <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
                     {/* Image - Clickable */}
-                    <div 
+                    <div
                       onClick={() => setLightboxImage(item.image)}
                       style={{
-                        width: '200px',
-                        minHeight: '180px',
+                        width: 'clamp(120px, 30%, 200px)',
+                        minHeight: '160px',
                         backgroundImage: `url(${item.image})`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
@@ -215,7 +217,7 @@ const NewsModern = () => {
                         </span>
                         <span style={{ fontSize: '0.8rem', color: '#888', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
                           <Clock size={14} />
-                          {item.readTime}
+                          {item.readTime} {t('news.minRead')}
                         </span>
                       </div>
 
@@ -262,7 +264,7 @@ const NewsModern = () => {
                             fontSize: '0.9rem',
                           }}
                         >
-                          {expandedArticle === item.id ? 'Show Less' : 'Read More'}
+                          {expandedArticle === item.id ? t('news.showLess') : t('news.readMore')}
                           <ChevronRight size={16} style={{
                             transform: expandedArticle === item.id ? 'rotate(180deg)' : 'rotate(0deg)',
                             transition: 'transform 0.3s',
@@ -300,7 +302,7 @@ const NewsModern = () => {
                       e.target.style.boxShadow = '0 4px 15px rgba(211, 47, 47, 0.3)';
                     }}
                   >
-                    {showMore ? 'View Less' : 'View More'}
+                    {showMore ? t('news.viewLess') : t('news.viewMore')}
                   </button>
                 </div>
               )}
@@ -322,7 +324,7 @@ const NewsModern = () => {
               marginBottom: '1.5rem',
               color: '#1a1a1a',
             }}>
-              Upcoming Events
+              {t('news.upcoming')}
             </h3>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -402,7 +404,7 @@ const NewsModern = () => {
               e.target.style.color = '#D32F2F';
             }}
             >
-              View All Events
+              {t('news.viewAll')}
               <ArrowRight size={18} />
             </button>
           </div>

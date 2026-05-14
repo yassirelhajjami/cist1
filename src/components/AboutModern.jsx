@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Award, Globe, Heart, Users, CheckCircle } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const AboutModern = () => {
+  const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
 
@@ -26,45 +28,45 @@ const AboutModern = () => {
   const features = [
     {
       icon: Award,
-      title: 'Ontario Curriculum',
-      description: '100% English instruction with Ontario curriculum standards',
+      title: t('about.ontarioLabel'),
+      description: t('about.ontarioDesc'),
     },
     {
       icon: Globe,
-      title: 'Ministry Registered',
-      description: 'Students registered with Ministry of Education of Ontario',
+      title: t('about.ministryLabel'),
+      description: t('about.ministryDesc'),
     },
     {
       icon: Users,
-      title: 'Small Classes',
-      description: '10:1 student to teacher ratio',
+      title: t('about.classesLabel'),
+      description: t('about.classesDesc'),
     },
     {
       icon: Heart,
-      title: 'Holistic Care',
-      description: 'Focus on overall development',
+      title: t('about.holisticLabel'),
+      description: t('about.holisticDesc'),
     },
   ];
 
   const stats = [
-    { value: '15+', label: 'Nationalities' },
-    { value: '98%', label: 'University Acceptance' },
-    { value: '10:1', label: 'Student Ratio' },
-    { value: '2010', label: 'Founded' },
+    { value: '15+', label: t('about.nationalities') },
+    { value: '98%', label: t('about.university') },
+    { value: '10:1', label: t('about.ratio') },
+    { value: '2010', label: t('about.founded') },
   ];
 
   const values = [
     {
-      title: 'Excellence',
-      description: 'We pursue academic excellence through rigorous Canadian curriculum standards and innovative teaching methods.',
+      title: t('about.excellenceLabel'),
+      description: t('about.excellenceDesc'),
     },
     {
-      title: 'Community',
-      description: 'We foster a supportive, inclusive community where every student feels valued and empowered to succeed.',
+      title: t('about.communityLabel'),
+      description: t('about.communityDesc'),
     },
     {
-      title: 'Global Citizenship',
-      description: 'We prepare students to become responsible global citizens with cross-cultural understanding.',
+      title: t('about.globalLabel'),
+      description: t('about.globalDesc'),
     },
   ];
 
@@ -96,7 +98,7 @@ const AboutModern = () => {
               letterSpacing: '2px',
             }}
           >
-            About Us
+            {t('about.label')}
           </span>
           <h2
             style={{
@@ -107,7 +109,7 @@ const AboutModern = () => {
               fontFamily: 'Playfair Display, serif',
             }}
           >
-            Shaping Tomorrow's Leaders Today
+            {t('about.title')}
           </h2>
           <p
             style={{
@@ -118,8 +120,7 @@ const AboutModern = () => {
               lineHeight: 1.7,
             }}
           >
-            Canadian International School Tangier stands as a beacon of educational excellence in North Africa,
-            offering a comprehensive Canadian curriculum that prepares students for global success.
+            {t('about.description')}
           </p>
         </div>
 
@@ -183,7 +184,7 @@ const AboutModern = () => {
                 marginBottom: '1rem',
               }}
             >
-              A World-Class Education in Tangier
+              {t('about.worldClassTitle')}
             </h3>
             <p
               style={{
@@ -192,13 +193,12 @@ const AboutModern = () => {
                 marginBottom: '1.5rem',
               }}
             >
-              Our trilingual program in English, French, and Arabic ensures students develop strong
-              linguistic skills while maintaining cultural connections. We combine innovative teaching
-              methods with traditional values to create well-rounded, confident individuals.
+              {t('about.worldClassDesc')}
             </p>
 
             {/* Features Grid */}
             <div
+              className="about-features-grid"
               style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(2, 1fr)',
@@ -299,7 +299,7 @@ const AboutModern = () => {
               marginBottom: '2rem',
             }}
           >
-            Our Core Values
+            {t('about.valuesTitle')}
           </h3>
 
           {/* Tabs */}

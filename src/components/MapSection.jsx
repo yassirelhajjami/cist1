@@ -214,45 +214,6 @@ const MapSection = () => {
           </div>
         </div>
 
-        {/* Quick Info */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-          gap: '1.5rem',
-          marginTop: '3rem',
-        }}>
-          {[
-            { label: 'Distance from Airport', value: '8 km' },
-            { label: 'Distance from City Center', value: '12 km' },
-            { label: 'Campus Size', value: '5 hectares' },
-            { label: 'Parking Available', value: 'Yes' },
-          ].map((info, index) => (
-            <div
-              key={index}
-              style={{
-                backgroundColor: '#f8f9fa',
-                padding: '1.5rem',
-                borderRadius: '16px',
-                textAlign: 'center',
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-                transition: `all 0.6s ease-out ${0.5 + index * 0.1}s`,
-              }}
-            >
-              <div style={{
-                fontSize: '1.75rem',
-                fontWeight: 700,
-                color: '#D32F2F',
-                marginBottom: '0.5rem',
-              }}>
-                {info.value}
-              </div>
-              <div style={{ color: '#666', fontSize: '0.9rem' }}>
-                {info.label}
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );

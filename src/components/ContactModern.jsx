@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import emailjs from '@emailjs/browser';
 import { MapPin, Phone, Mail, Clock, Send, CheckCircle, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 
 const ContactModern = () => {
@@ -54,14 +55,20 @@ const ContactModern = () => {
     setValidationErrors({});
     setIsSubmitting(true);
 
-    const form = e.target;
-    const data = new FormData(form);
-
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(data).toString()
-    })
+    emailjs.send(
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      {
+        form_type: 'Contact Form',
+        from_name: formData.name,
+        from_email: formData.email,
+        phone: formData.phone || 'N/A',
+        subject: formData.subject,
+        message: formData.message,
+        to_email: 'archsudo@gmail.com',
+      },
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+    )
       .then(() => {
         setIsSubmitting(false);
         setIsSubmitted(true);
@@ -70,7 +77,7 @@ const ContactModern = () => {
       })
       .catch(() => {
         setIsSubmitting(false);
-        setSubmitError('There was an error submitting the form. Please try again.');
+        setSubmitError('There was an error sending your message. Please try again.');
       });
   };
 
@@ -250,8 +257,7 @@ const ContactModern = () => {
                 <p style={{ color: '#666' }}>Thank you for contacting us. We'll respond soon.</p>
               </div>
             ) : (
-              <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={handleSubmit}>
-                <input type="hidden" name="form-name" value="contact" />
+              <form onSubmit={handleSubmit}>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem', marginBottom: '1rem' }}>
                   <div>
                     <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, fontSize: '0.9rem', color: '#333' }}>

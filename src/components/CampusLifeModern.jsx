@@ -72,7 +72,6 @@ const CampusLifeModern = () => {
     // Arts
     { id: 401, src: '/images/art/art-1.webp', category: 'arts', title: 'Art Exhibition' },
     { id: 402, src: '/images/art/art-2.webp', category: 'arts', title: 'Visual Arts' },
-    { id: 403, src: '/images/art/art-3.webp', category: 'arts', title: 'Creative Workshop' },
     { id: 405, src: '/images/art/art-5.webp', category: 'arts', title: 'Art Gallery' },
   ];
 

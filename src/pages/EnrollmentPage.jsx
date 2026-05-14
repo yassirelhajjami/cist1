@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import emailjs from '@emailjs/browser';
 import { ArrowLeft, CheckCircle, User, Phone, Mail, Users, MessageCircle, FileText } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import NavbarModern from '../components/NavbarModern';
@@ -33,16 +34,25 @@ const EnrollmentPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    const form = e.target;
-    const formDataObj = new FormData(form);
-    
     setSubmitError('');
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(formDataObj).toString()
-    })
+
+    emailjs.send(
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      {
+        form_type: 'Pre-Registration',
+        student_name: formData.studentName,
+        date_of_birth: formData.dateOfBirth,
+        gender: formData.gender,
+        grade_applying: formData.gradeApplying,
+        parent_name: formData.parentName,
+        phone: formData.phone,
+        whatsapp: formData.whatsapp || 'N/A',
+        from_email: formData.email,
+        to_email: 'archsudo@gmail.com',
+      },
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+    )
       .then(() => {
         setSubmitted(true);
       })
@@ -155,8 +165,7 @@ const EnrollmentPage = () => {
 
       {/* Simple Form */}
       <div className="container" style={{ padding: '5rem 1rem 3rem', maxWidth: '600px', margin: '0 auto' }}>
-        <form name="pre-registration" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={handleSubmit}>
-          <input type="hidden" name="form-name" value="pre-registration" />
+        <form onSubmit={handleSubmit}>
           
           <div style={{
             backgroundColor: 'white',

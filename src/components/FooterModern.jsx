@@ -28,13 +28,6 @@ const FooterModern = () => {
       { name: 'News & Events', href: '#news' },
       { name: 'Contact', href: '#contact' },
     ],
-    'Resources': [
-      { name: 'Academic Calendar', href: '#' },
-      { name: 'School Policies', href: '#' },
-      { name: 'Parent Portal', href: '#' },
-      { name: 'Student Handbook', href: '#' },
-      { name: 'Career Opportunities', href: '#' },
-    ],
     'Contact': [
       { name: 'Route du Charf, Km 5', href: '#map-section' },
       { name: 'Tangier 90000, Morocco', href: '#map-section' },

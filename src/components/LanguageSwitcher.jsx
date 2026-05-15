@@ -2,10 +2,20 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const languages = [
-  { code: 'en', label: 'EN', flag: '🇨🇦' },
-  { code: 'fr', label: 'FR', flag: '🇫🇷' },
-  { code: 'es', label: 'ES', flag: '🇪🇸' },
+  { code: 'en', name: 'English',  img: 'https://flagcdn.com/w40/gb.png' },
+  { code: 'fr', name: 'Français', img: 'https://flagcdn.com/w40/fr.png' },
+  { code: 'es', name: 'Español',  img: 'https://flagcdn.com/w40/es.png' },
 ];
+
+const Flag = ({ src, name, size = 22 }) => (
+  <img
+    src={src}
+    alt={name}
+    width={size}
+    height={Math.round(size * 0.67)}
+    style={{ borderRadius: '3px', objectFit: 'cover', display: 'block', flexShrink: 0 }}
+  />
+);
 
 const LanguageSwitcher = ({ scrolled }) => {
   const { i18n } = useTranslation();
@@ -22,23 +32,21 @@ const LanguageSwitcher = ({ scrolled }) => {
     <div style={{ position: 'relative' }}>
       <button
         onClick={() => setOpen(!open)}
+        aria-label={`Language: ${current.name}`}
         style={{
           display: 'flex',
           alignItems: 'center',
           gap: '0.35rem',
           background: scrolled ? '#f5f5f5' : 'rgba(255,255,255,0.15)',
           border: scrolled ? '1px solid #e0e0e0' : '1px solid rgba(255,255,255,0.3)',
-          color: scrolled ? '#333' : '#fff',
-          padding: '0.4rem 0.75rem',
+          padding: '0.4rem 0.65rem',
           borderRadius: '20px',
-          fontSize: '0.85rem',
-          fontWeight: 600,
           cursor: 'pointer',
           transition: 'all 0.2s ease',
+          color: scrolled ? '#333' : '#fff',
         }}
       >
-        <span>{current.flag}</span>
-        <span>{current.label}</span>
+        <Flag src={current.img} name={current.name} size={22} />
         <span style={{ fontSize: '0.6rem', opacity: 0.7 }}>▼</span>
       </button>
 
@@ -57,7 +65,7 @@ const LanguageSwitcher = ({ scrolled }) => {
             boxShadow: '0 8px 30px rgba(0,0,0,0.15)',
             overflow: 'hidden',
             zIndex: 1000,
-            minWidth: '120px',
+            minWidth: '145px',
           }}>
             {languages.map(lang => (
               <button
@@ -66,7 +74,7 @@ const LanguageSwitcher = ({ scrolled }) => {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '0.5rem',
+                  gap: '0.65rem',
                   width: '100%',
                   padding: '0.6rem 1rem',
                   background: i18n.language === lang.code ? '#FFF5F5' : 'transparent',
@@ -81,8 +89,8 @@ const LanguageSwitcher = ({ scrolled }) => {
                 onMouseEnter={e => { if (i18n.language !== lang.code) e.currentTarget.style.background = '#f9f9f9'; }}
                 onMouseLeave={e => { if (i18n.language !== lang.code) e.currentTarget.style.background = 'transparent'; }}
               >
-                <span>{lang.flag}</span>
-                <span>{lang.label}</span>
+                <Flag src={lang.img} name={lang.name} size={22} />
+                <span>{lang.name}</span>
               </button>
             ))}
           </div>

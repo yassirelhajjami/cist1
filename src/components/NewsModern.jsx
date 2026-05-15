@@ -87,10 +87,8 @@ const NewsModern = () => {
   ];
 
   const upcomingEvents = [
-    { date: 'May 20', title: 'Parent-Teacher Conference', time: '9:00 AM - 4:00 PM' },
-    { date: 'Jun 5', title: 'Spring Festival', time: '2:00 PM - 6:00 PM' },
-    { date: 'Jun 18', title: 'End of Year Ceremony', time: '10:00 AM - 3:00 PM' },
-    { date: 'Sep 1', title: 'Back to School Day', time: '8:00 AM - 1:00 PM' },
+    { date: 'May 20', title: 'School Trip', time: 'All Day' },
+    { date: 'Jun 19', title: 'Graduation Ceremony', time: '10:00 AM - 2:00 PM' },
   ];
 
   const filteredNews = activeFilter === 'all'

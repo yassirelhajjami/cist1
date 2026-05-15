@@ -69,8 +69,20 @@ const NewsModern = () => {
       title: 'CIST Students Win Ramadan Mini Football Tournament',
       excerpt: 'Our students beat competing schools and brought home the championship trophy from the Ramadan Mini Football Tournament.',
       author: 'Coach Yassir',
-      image: '/images/sport/sport10.webp',
+      image: '/images/events/sport10.webp',
       content: 'Congratulations to our amazing students for winning the Ramadan Mini Football Tournament! CIST faced off against several other schools in a thrilling competition, and our team rose to the challenge with exceptional skill, teamwork, and sportsmanship. Competing against strong opponents, they delivered outstanding performances in every match. This victory is a testament to their dedication and hard work in training. We are incredibly proud of their achievement!',
+    },
+    {
+      id: 4,
+      category: 'events',
+      categoryLabel: 'Event',
+      date: 'May 21, 2026',
+      readTime: '3 min',
+      title: 'CIST × Baraat Al Boughaz — Recreational Day at Medina Forest',
+      excerpt: 'CIST partnered with Baraat Al Boughaz Association to organise a fun-filled outdoor day for our students at Medina Forest.',
+      author: 'Admin Office',
+      image: '/images/events/collab.webp',
+      content: 'On Thursday, May 21, 2026, CIST students enjoyed a special recreational day at Medina Forest in collaboration with the Baraat Al Boughaz Association. The programme was packed with activities designed to nurture teamwork, creativity, and joy — including flag salute, sports competitions, group games, a shared breakfast, artistic creations, a drawing competition, and an educational nature lab. It was a wonderful day that brought our school community closer together while connecting students with the beautiful natural environment of Tangier.',
     },
   ];
 
@@ -183,14 +195,26 @@ const NewsModern = () => {
                       style={{
                         width: 'clamp(120px, 30%, 200px)',
                         minHeight: '160px',
-                        backgroundImage: `url(${item.image})`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
                         flexShrink: 0,
                         cursor: 'pointer',
+                        overflow: 'hidden',
                         position: 'relative',
                       }}
-                    />
+                    >
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        loading="lazy"
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                          objectPosition: 'center',
+                          display: 'block',
+                          minHeight: '160px',
+                        }}
+                      />
+                    </div>
 
                     {/* Content */}
                     <div style={{ flex: 1, padding: '1.5rem', minWidth: '250px' }}>
